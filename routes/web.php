@@ -31,6 +31,6 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/author', [AuthorController::class, 'index'])->name('author.index');
 Route::get('/author/create', [AuthorController::class, 'create'])->name('author.create');
-
+Route::post('/author/store', [AuthorController::class, 'store'])->name('author.store');
 
 require __DIR__ . '/auth.php';

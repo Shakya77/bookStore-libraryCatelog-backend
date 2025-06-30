@@ -20,7 +20,7 @@
 
             <!-- Users -->
             <a href=""
-                class="sidebar-link {{ request()->routeIs('users.*') ? 'active' : '' }} group flex items-center px-4 py-3 text-base font-medium rounded-lg {{ request()->routeIs('users.*') ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700' }} relative"
+                class="sidebar-link {{ request()->routeIs('author') ? 'active' : '' }} group flex items-center px-4 py-3 text-base font-medium rounded-lg {{ request()->routeIs('author') ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50' : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700' }} relative"
                 title="{{ __('Users') }}">
                 <span class="iconify flex-shrink-0" data-icon="tabler:users" data-width="22"></span>
                 <span class="sidebar-text ml-4">{{ __('Users') }}</span>

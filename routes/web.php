@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/author', [AuthorController::class, 'index'])->name('author.index');
+Route::get('/author', [AuthorController::class, 'index'])->name('author');
 Route::get('/author/create', [AuthorController::class, 'create'])->name('author.create');
 Route::post('/author/store', [AuthorController::class, 'store'])->name('author.store');
 

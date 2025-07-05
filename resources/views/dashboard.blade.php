@@ -9,18 +9,6 @@
                     {{ __('Welcome back, :name!', ['name' => Auth::user()->name]) }}
                 </p>
             </div>
-            <div class="flex items-center space-x-3">
-                <button
-                    class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-lg transition-colors duration-200">
-                    <span class="iconify mr-2" data-icon="tabler:plus" data-width="16"></span>
-                    {{ __('Add New') }}
-                </button>
-                <button
-                    class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium text-sm rounded-lg transition-colors duration-200">
-                    <span class="iconify mr-2" data-icon="tabler:download" data-width="16"></span>
-                    {{ __('Export') }}
-                </button>
-            </div>
         </div>
     </x-slot>
 
@@ -197,5 +185,8 @@
     <!-- Include all modals -->
     @include('modals.quick-actions')
 
+    @push('scripts')
+        <script src="{{ asset('js/modals.js') }}"></script>
+    @endpush
 
 </x-app-layout>

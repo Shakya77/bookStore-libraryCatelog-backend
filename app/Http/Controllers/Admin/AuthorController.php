@@ -38,7 +38,14 @@ class AuthorController extends Controller
         ], 200);
     }
 
-    public function getAll() {
-        
+    public function getAll()
+    {
+        $authors = Author::select('id', 'name', 'birthday', 'bio', 'image')
+            ->where('is_active', true)
+            ->get();
+
+        return response()->json([
+            'data' => $authors,
+        ]);
     }
 }

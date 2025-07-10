@@ -24,3 +24,4 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
 
 Route::post('/author/store', [AuthorController::class, 'store'])->name('author.store');
+Route::get('/author/getAll', [AuthorController::class, 'getAll'])->name('author.getAll');

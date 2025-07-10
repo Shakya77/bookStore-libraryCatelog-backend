@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->date('birthday');
             $table->text('bio');
-            $table->text('image');
+            $table->boolean('is_active')->default(true);
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

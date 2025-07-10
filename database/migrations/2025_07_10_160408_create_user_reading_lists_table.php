@@ -22,6 +22,8 @@ return new class extends Migration
 
             $table->enum('status', ['wishlist', 'currently_reading', 'read']);
 
+            $table->boolean('is_active')->default(true);
+
             $table->timestamps();
         });
     }

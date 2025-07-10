@@ -23,6 +23,8 @@ return new class extends Migration
             $table->tinyInteger('rating')->comment('1 to 5 rating');
             $table->text('review');
 
+            $table->boolean('is_active')->default(true);
+
             $table->timestamps();
         });
     }

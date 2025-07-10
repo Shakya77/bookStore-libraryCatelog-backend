@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('isbn')->nullable();
             $table->string('format')->nullable()->comment('PDF, EPUB, Hardcover'); // PDF, EPUB, Hardcover, etc.
 
+            $table->boolean('is_active')->default(true);
+
             $table->timestamps();
         });
     }

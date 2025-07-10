@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class AuthorController extends Controller
 {
@@ -21,17 +20,13 @@ class AuthorController extends Controller
 
     public function store(Request $request)
     {
-        $validate = Validator::make($request->all(), [
-            'name' => 'required',
-            'birthday' => 'required',
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'birthday' => 'required|date',
             'bio' => 'required',
         ]);
-        return response()->json([
-            'success' => false,
-            'meesage' => $validate->errors(),
-        ]);
 
-        $author = Author::create([
+        Author::create([
             'name' => $request->name,
             'birthday' => $request->birthday,
             'bio' => $request->bio,
@@ -40,7 +35,10 @@ class AuthorController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Author created successfully!',
-            'data' => $author,
-        ]);
+        ], 200);
+    }
+
+    public function getAll() {
+        
     }
 }

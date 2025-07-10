@@ -28,6 +28,8 @@ return new class extends Migration
 
             $table->string('rating_avg');
 
+            $table->boolean('is_active')->default(true);
+
             $table->timestamps();
         });
     }

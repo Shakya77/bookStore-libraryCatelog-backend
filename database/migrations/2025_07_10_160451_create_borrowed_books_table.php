@@ -25,6 +25,8 @@ return new class extends Migration
             $table->date('due_date');
             $table->date('returned_at')->nullable();
 
+            $table->boolean('is_active')->default(true);
+
             $table->timestamps();
         });
     }

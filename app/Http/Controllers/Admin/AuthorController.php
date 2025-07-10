@@ -26,10 +26,10 @@ class AuthorController extends Controller
             'birthday' => 'required',
             'bio' => 'required',
         ]);
-
-        if ($validate->fails()) {
-            return redirect()->back()->withErrors($validate)->withInput();
-        }
+        return response()->json([
+            'success' => false,
+            'meesage' => $validate->errors(),
+        ]);
 
         $author = Author::create([
             'name' => $request->name,

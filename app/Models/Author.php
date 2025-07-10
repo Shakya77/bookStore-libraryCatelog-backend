@@ -14,6 +14,7 @@ class Author extends Model
         'birthday',
         'bio',
         'image',
+        'photo',
         'created_at',
         'updated_at',
     ];

@@ -4,6 +4,8 @@ use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/uploads/{type}/{filename}', function ($type, $filename) {
+    $allowed_types = ['authors'];
+    if (in_array($type, $allowed_types)) {
+        $path = storage_path('app/uploads/' . $type . '/' . $filename);
+        if (!File::exists($path)) {
+            abort(404);
+        }
+
+        $file = File::get($path);
+        $type = File::mimeType($path);
+        $size = File::size($path);
+        $response = Response::make($file, 200);
+        $response->header("Content-Type", $type);
+        $response->header("Content-Length", $size);
+        return $response;
+    }
+    abort(404);
+})->name('assets.uploads');
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -25,3 +46,5 @@ Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'log
 
 Route::post('/author/store', [AuthorController::class, 'store'])->name('author.store');
 Route::get('/author/getAll', [AuthorController::class, 'getAll'])->name('author.getAll');
+Route::put('/author/{id}', [AuthorController::class, 'update'])->name('author.update');
+Route::delete('/author/{id}', [AuthorController::class, 'destroy'])->name('author.destroy');

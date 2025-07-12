@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AuthorController extends Controller
 {
@@ -26,10 +27,21 @@ class AuthorController extends Controller
             'bio' => 'required',
         ]);
 
+        if (request()->has('profileImage') && (request('profileImage') != null)) {
+            $slug = rand();
+            $imagePath = request('profileImage');
+            $randomNumber = rand(1000, 9999);
+            $timestamp = time();
+            $new_profile_image = "{$slug}_{$timestamp}_{$randomNumber}.png";
+            $destinationPath = 'uploads/authors';
+            Storage::putFileAs($destinationPath, $imagePath, $new_profile_image);
+        }
+
         Author::create([
             'name' => $request->name,
             'birthday' => $request->birthday,
             'bio' => $request->bio,
+            'image' => $new_profile_image ?? null,
         ]);
 
         return response()->json([
@@ -38,14 +50,52 @@ class AuthorController extends Controller
         ], 200);
     }
 
-    public function getAll()
+    public function update(Request $request, $id)
     {
-        $authors = Author::select('id', 'name', 'birthday', 'bio', 'image')
-            ->where('is_active', true)
-            ->get();
+        $author = Author::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'bio' => 'required|string',
+            'birthday' => 'required|date',
+            'profileImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+        ]);
+
+        $author->fill([
+            'name' => $validated['name'],
+            'bio' => $validated['bio'],
+            'birthday' => $validated['birthday'],
+        ]);
+
+        if (request()->has('profileImage') && (request('profileImage') != null)) {
+            $slug = rand();
+            $imagePath = request('profileImage');
+            $randomNumber = rand(1000, 9999);
+            $timestamp = time();
+            $new_profile_image = "{$slug}_{$timestamp}_{$randomNumber}.png";
+            $destinationPath = 'uploads/authors';
+            Storage::putFileAs($destinationPath, $imagePath, $new_profile_image);
+            $author->image = $new_profile_image;
+        }
+
+        $author->save();
 
         return response()->json([
-            'data' => $authors,
+            'message' => 'Author updated successfully',
+            'data' => $author,
+            'id' => $author->id,
+            'success' => true,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $author = Author::findOrFail($id);
+        $author->delete();
+
+        return response()->json([
+            'message' => 'Author deleted successfully',
+            'success' => true,
         ]);
     }
 }

@@ -24,6 +24,8 @@ class LoginController extends Controller
 
         return response()->json([
             'token' => $token,
+            'role' => $user->role,
+            'user' => $user,
         ], 200);
     }
 

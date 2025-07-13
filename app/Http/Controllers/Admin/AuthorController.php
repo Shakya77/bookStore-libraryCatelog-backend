@@ -9,14 +9,16 @@ use Illuminate\Support\Facades\Storage;
 
 class AuthorController extends Controller
 {
-    public function index()
+    public function getAll()
     {
-        return view('admin.author.index');
-    }
+        $authors = Author::select('id', 'name', 'birthday', 'bio', 'image', 'created_at')
+            ->where('is_active', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-    public function create()
-    {
-        return view('admin.author.create');
+        return response()->json([
+            'data' => $authors,
+        ]);
     }
 
     public function store(Request $request)
@@ -89,7 +91,7 @@ class AuthorController extends Controller
     }
 
     public function destroy($id)
-    {
+    {   
         $author = Author::findOrFail($id);
         $author->delete();
 

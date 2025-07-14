@@ -13,6 +13,7 @@ class CategoryController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'icon' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -21,12 +22,12 @@ class CategoryController extends Controller
 
         $category = Category::create([
             'name' => $request->name,
+            'icon' => $request->icon,
         ]);
 
         return response()->json([
             'success' => true,
             'message' => 'Category created successfully!',
-            'data' => $category,
         ]);
     }
 

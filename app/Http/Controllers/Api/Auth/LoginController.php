@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,9 +23,20 @@ class LoginController extends Controller
         $user = $request->user();
         $token = $user->createToken('api_token')->plainTextToken;
 
+        User::where('email', $request->email)->update(['api_token' => $token]);
+
         return response()->json([
             'token' => $token,
-            'role' => $user->role,
+        ], 200);
+    }
+
+    public function getInfo(Request $request)
+    {
+        $header = $request->header('Authorization');
+
+        $user = User::where('api_token', $header)->first();
+
+        return response()->json([
             'user' => $user,
         ], 200);
     }

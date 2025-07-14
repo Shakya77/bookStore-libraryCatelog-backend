@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthorController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,9 +43,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/login', [LoginController::class, 'login']);
+Route::get('/getinfo', [LoginController::class, 'getInfo']);
 Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
 
 Route::post('/author/store', [AuthorController::class, 'store'])->name('author.store');
 Route::get('/author/getAll', [AuthorController::class, 'getAll'])->name('author.getAll');
 Route::put('/author/{id}', [AuthorController::class, 'update'])->name('author.update');
 Route::delete('/author/{id}', [AuthorController::class, 'destroy'])->name('author.destroy');
+
+Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+Route::get('/category/getAll', [CategoryController::class, 'getAll'])->name('category.getAll');
+Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
+Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');

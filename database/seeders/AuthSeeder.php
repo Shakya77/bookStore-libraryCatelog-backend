@@ -18,7 +18,7 @@ class AuthSeeder extends Seeder
         $users = [
             [
                 'name' => 'Super Admin',
-                'email' => 'superadmin@gmail.com',
+                'email' => 'admin@gmail.com',
                 'role' => 'admin',
                 'password' => Hash::make('password'),
                 'created_at' => now(),

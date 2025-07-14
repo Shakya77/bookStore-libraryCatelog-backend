@@ -31,5 +31,50 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function getAll() {}
+    public function getAll()
+    {
+        $authors = Category::select('id', 'name', 'icon', 'created_at')
+            ->where('is_active', true)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json([
+            'data' => $authors,
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required',
+            'icon' => 'required',
+        ]);
+
+        $category->fill([
+            'name' => $validated['name'],
+            'icon' => $validated['icon'],
+        ]);
+
+        $category->save();
+
+        return response()->json([
+            'message' => 'Category updated successfully',
+            'data' => $category,
+            'id' => $category->id,
+            'success' => true,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $author = Category::findOrFail($id);
+        $author->delete();
+
+        return response()->json([
+            'message' => 'Category deleted successfully',
+            'success' => true,
+        ]);
+    }
 }

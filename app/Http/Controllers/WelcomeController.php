@@ -9,7 +9,7 @@ class WelcomeController extends Controller
 {
     public function getCategory()
     {
-        $categories = Category::where('is_active', 1)->select('id', 'slug', 'name', 'icon', 'color')->get();
+        $categories = Category::where('is_active', 1)->select('id', 'slug', 'name', 'icon', 'color', 'description')->get();
 
         return response()->json([
             'success' => true,

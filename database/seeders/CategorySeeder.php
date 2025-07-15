@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class CategorySeeder extends Seeder
 {
@@ -14,74 +13,74 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             [
-                'name' => 'Fiction',
-                'description' => 'Books based on imaginative storytelling.',
-                'icon' => 'mdi:book-open-variant',
-                'color' => 'bg-purple-100 text-purple-600',
-            ],
-            [
-                'name' => 'Non-Fiction',
-                'description' => 'Books based on facts and real events.',
-                'icon' => 'mdi:book-check',
-                'color' => 'bg-green-100 text-green-600',
-            ],
-            [
-                'name' => 'Young Adult (YA)',
-                'description' => 'Books geared toward teens and young adults.',
-                'icon' => 'mdi:account-voice',
-                'color' => 'bg-yellow-100 text-yellow-600',
-            ],
-            [
-                'name' => 'Children\'s Books',
-                'description' => 'Books for young children, often with illustrations.',
-                'icon' => 'mdi:baby-face-outline',
+                'name' => 'Arts & Photography',
+                'icon' => 'mdi:palette',
                 'color' => 'bg-pink-100 text-pink-600',
+                'description' => 'Visual arts and photography',
             ],
             [
-                'name' => 'Self-Help',
-                'description' => 'Books focused on personal development and life improvement.',
-                'icon' => 'mdi:meditation',
+                'name' => 'Boxed Sets',
+                'icon' => 'mdi:package-variant',
                 'color' => 'bg-orange-100 text-orange-600',
+                'description' => 'Complete book collections',
             ],
             [
-                'name' => 'Educational',
-                'description' => 'Books used for academic or learning purposes.',
-                'icon' => 'mdi:school-outline',
-                'color' => 'bg-blue-100 text-blue-600',
+                'name' => 'Business and Investing',
+                'icon' => 'mdi:briefcase',
+                'color' => 'bg-amber-100 text-amber-600',
+                'description' => 'Business and finance guides',
             ],
             [
-                'name' => 'Comics & Graphic Novels',
-                'description' => 'Books presented in comic strip format or visual storytelling.',
-                'icon' => 'mdi:emoticon-outline',
+                'name' => 'Fiction and Literature',
+                'icon' => 'mdi:shield-outline',
                 'color' => 'bg-red-100 text-red-600',
+                'description' => 'Stories and classic literature',
             ],
             [
-                'name' => 'Biographies & Memoirs',
-                'description' => 'Books about the lives of real people.',
-                'icon' => 'mdi:account-box-outline',
-                'color' => 'bg-gray-100 text-gray-600',
+                'name' => 'Foreign Languages',
+                'icon' => 'mdi:translate',
+                'color' => 'bg-blue-100 text-blue-600',
+                'description' => 'Books in different languages',
             ],
             [
-                'name' => 'Religion & Spirituality',
-                'description' => 'Books focused on religious beliefs and practices.',
-                'icon' => 'mdi:cross-outline',
-                'color' => 'bg-indigo-100 text-indigo-600',
-            ],
-            [
-                'name' => 'Science & Technology',
-                'description' => 'Books on scientific concepts and technological advancements.',
-                'icon' => 'mdi:atom',
+                'name' => 'History, Biography, and Politics',
+                'icon' => 'mdi:message-text',
                 'color' => 'bg-cyan-100 text-cyan-600',
+                'description' => 'Historical and biographical works',
+            ],
+            [
+                'name' => 'Kids and Teens',
+                'icon' => 'mdi:emoticon-happy',
+                'color' => 'bg-pink-100 text-pink-600',
+                'description' => 'Books for young readers',
+            ],
+            [
+                'name' => 'Learning and Reference',
+                'icon' => 'mdi:feather',
+                'color' => 'bg-gray-100 text-gray-600',
+                'description' => 'Educational and reference materials',
+            ],
+            [
+                'name' => 'Lifestyle and Wellness',
+                'icon' => 'mdi:account-star',
+                'color' => 'bg-green-100 text-green-600',
+                'description' => 'Health and lifestyle guides',
+            ],
+            [
+                'name' => 'Manga and Graphic Novels',
+                'icon' => 'mdi:lightning-bolt',
+                'color' => 'bg-blue-100 text-blue-600',
+                'description' => 'Comics and graphic stories',
             ],
         ];
 
         foreach ($categories as $category) {
             DB::table('categories')->insert([
                 'name' => $category['name'],
-                'description' => $category['description'],
                 'slug' => Str::slug($category['name']),
                 'icon' => $category['icon'],
                 'color' => $category['color'],
+                'description' => $category['description'],
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]);

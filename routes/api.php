@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AuthorController;
 use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\File;
@@ -64,3 +65,5 @@ Route::delete('/book/{id}', [BookController::class, 'destroy'])->name('book.dest
 
 Route::get('/book/getAuthor', [BookController::class, 'getAuthor'])->name('book.getAuthor');
 Route::get('/book/getCategories', [BookController::class, 'getCategories'])->name('book.getCategories');
+
+Route::get('/welcome/category', [WelcomeController::class, 'getCategory'])->name('welcome.getCategory');

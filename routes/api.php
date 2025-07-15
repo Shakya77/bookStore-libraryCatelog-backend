@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthorController;
+use App\Http\Controllers\Admin\BookController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Response;
 */
 
 Route::get('/uploads/{type}/{filename}', function ($type, $filename) {
-    $allowed_types = ['authors'];
+    $allowed_types = ['authors', 'book_cover'];
     if (in_array($type, $allowed_types)) {
         $path = storage_path('app/uploads/' . $type . '/' . $filename);
         if (!File::exists($path)) {
@@ -55,3 +56,11 @@ Route::post('/category/store', [CategoryController::class, 'store'])->name('cate
 Route::get('/category/getAll', [CategoryController::class, 'getAll'])->name('category.getAll');
 Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
 Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+
+Route::post('/book/store', [BookController::class, 'store'])->name('book.store');
+Route::get('/book/getAll', [BookController::class, 'getAll'])->name('book.getAll');
+Route::put('/book/{id}', [BookController::class, 'update'])->name('book.update');
+Route::delete('/book/{id}', [BookController::class, 'destroy'])->name('book.destroy');
+
+Route::get('/book/getAuthor', [BookController::class, 'getAuthor'])->name('book.getAuthor');
+Route::get('/book/getCategories', [BookController::class, 'getCategories'])->name('book.getCategories');
